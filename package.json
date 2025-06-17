@@ -5,6 +5,7 @@
   "description": "Rename selected files and folders in Finder to URL-friendly slug format with international character support",
   "icon": "extension-icon.png",
   "author": "tarikkavaz",
+  "owner": "tarikkavaz",
   "categories": ["Productivity", "System", "Other"],
   "license": "MIT",
   "commands": [
