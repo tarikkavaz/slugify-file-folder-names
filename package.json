@@ -7,6 +7,17 @@
   "author": "tarikkavaz",
   "categories": ["Productivity", "System", "Other"],
   "license": "MIT",
+  "preferences": [
+    {
+      "name": "useGermanTransliteration",
+      "title": "German Transliteration",
+      "description": "Enable German umlauts transliteration (ä→ae, ö→oe, ü→ue, ß→ss)",
+      "type": "checkbox",
+      "required": false,
+      "default": false,
+      "label": "Use German transliteration for umlauts"
+    }
+  ],
   "commands": [
     {
       "name": "slug",

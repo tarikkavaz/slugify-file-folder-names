@@ -103,13 +103,28 @@ const CHAR_MAP: Record<string, string> = {
   Ž: "z",
 };
 
+// German character mappings for transliteration
+const GERMAN_CHAR_MAP: Record<string, string> = {
+  // German umlauts
+  ä: "ae",
+  ö: "oe",
+  ü: "ue",
+  Ä: "ae",
+  Ö: "oe",
+  Ü: "ue",
+  ß: "ss",
+};
+
 /**
  * Converts a string to a URL-friendly slug
  * @param text - The text to slugify
  * @param options - Slugify options
  * @returns The slugified string
  */
-export function slugify(text: string, options: { preserveExtension?: boolean } = {}): string {
+export function slugify(
+  text: string,
+  options: { preserveExtension?: boolean; useGermanTransliteration?: boolean } = {},
+): string {
   if (!text) return "";
 
   let slug = text;
@@ -125,9 +140,10 @@ export function slugify(text: string, options: { preserveExtension?: boolean } =
   }
 
   // Apply character mappings
+  const charMap = options.useGermanTransliteration ? { ...CHAR_MAP, ...GERMAN_CHAR_MAP } : CHAR_MAP;
   slug = slug
     .split("")
-    .map((char) => CHAR_MAP[char] || char)
+    .map((char) => charMap[char] || char)
     .join("");
 
   // Convert to lowercase
@@ -157,8 +173,13 @@ export function slugify(text: string, options: { preserveExtension?: boolean } =
  * Generates a safe filename by slugifying and handling potential conflicts
  * @param originalName - The original filename
  * @param preserveExtension - Whether to preserve the file extension
+ * @param useGermanTransliteration - Whether to use German transliteration for umlauts
  * @returns The slugified filename
  */
-export function generateSlugFilename(originalName: string, preserveExtension: boolean = true): string {
-  return slugify(originalName, { preserveExtension });
+export function generateSlugFilename(
+  originalName: string,
+  preserveExtension: boolean = true,
+  useGermanTransliteration: boolean = false,
+): string {
+  return slugify(originalName, { preserveExtension, useGermanTransliteration });
 }
